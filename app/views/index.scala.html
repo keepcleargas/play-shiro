@@ -1,0 +1,34 @@
+@(users: Seq[User], currentUser: Option[User])
+
+@main("Sample Play Shiro Application") {
+  <h1>
+      Play Shiro Integration Example
+  </h1>
+
+  <div>
+      Current User is
+      @currentUser match {
+         case Some(user) => {
+               <span style="color: red">@user.email</span>
+               @helper.form(routes.Application.logout) {
+                  <div>
+                    <button type="submit">Logout</button>
+                  </div>
+               }
+         }
+         case None => {
+              <span style="color: red">Anonymous</span>
+               <div>
+                 <a href="@routes.Login.index">Login</a> or <a href="@routes.Register.index">Register</a>
+               </div>
+         }
+      }
+  </div>
+
+  <ul>
+  @users.map { user =>
+     <li>@user.email</li>
+  }
+  </ul>
+
+}

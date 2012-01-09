@@ -1,0 +1,49 @@
+@(form: Form[(String,String)])(implicit flash: Flash)
+
+<html>
+    <head>
+        <title>Login Page</title>
+        <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
+    </head>
+    <body>
+
+
+        <header>
+            <a href="@routes.Application.index" id="logo">Home</a>
+        </header>
+
+        @helper.form(routes.Login.authenticate) {
+
+            <h1>Sign in</h1>
+
+            @form.globalError.map { error =>
+                <p class="error">
+                    @error.message
+                </p>
+            }
+
+            @flash.get("success").map { message =>
+                <p class="success">
+                    @message
+                </p>
+            }
+
+            <p>
+                <input type="email" name="email" placeholder="Email" value="@form("email").value">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password">
+            </p>
+            <p>
+                <button type="submit">Login</button>
+            </p>
+
+            <p>
+              You can always login as "admin@@example.com"/"admin".
+            </p>
+        }
+
+    </body>
+</html>
+
+
